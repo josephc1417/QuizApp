@@ -27,11 +27,24 @@ body{
 
 /* center the question container  */
 .quiz-container{
-    background-color: white;
-    width: 600px;
+    background-color: transparent;
+    opacity: 200%;
+    width: 200px;
+    height: 290px;
     border-radius:10px;
-    box-shadow: 0px 0px 10px black;
-    max-width: 100%;
+    box-shadow: 12px 20px 40px black;
+   
+    transition-property: width;
+    transition-duration: 1s;
+    transition-timing-function: linear;
+    
+}
+.quiz-container:hover {
+  width:700px;
+
+    /* this would be to literally move uni-directional */
+    /* transform:translateY(100%); */
+
 }
 
 .quiz-header{
