@@ -41,3 +41,43 @@ const quizData = [
 
 
 ]
+
+const questionEl = document.getElementById('question')
+
+//selecting label elements 
+const a_text = document.getElementById('a_text')
+const b_text = document.getElementById('b_text')
+const c_text = document.getElementById('c_text')
+const d_text = document.getElementById('d_text')
+
+
+
+
+
+// we want to keep track of the current Question being asked
+//currentQuestion is give an index value of 0
+let currentQuiz = 0;
+loadQuiz()
+
+// create a function that load the quiz and the reloads every time that the submit button is clicked.
+function loadQuiz() {
+//Starting of with the first object being the first quiz
+//the first question is located at quizData[0] = currentQuestion
+    const currentQuizData = quizData[currentQuiz];
+
+    //assigning the contents fo the first question of the first obj to the innerText of the h2 element
+    questionEl.innerText = currentQuizData.question;
+    
+    
+    a_text.innerText = currentQuizData.a;
+    b_text.innerText = currentQuizData.b;
+    c_text.innerText = currentQuizData.c;
+    d_text.innerText = currentQuizData.d;
+
+    
+    
+    
+    
+    
+    currentQuestion++;
+}
