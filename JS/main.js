@@ -4,10 +4,10 @@
 const quizData = [
     {
         question: 'How old is Linda',
-        a_1:'10',
-        a_2:'17',
-        a_3:'26',
-        a_4:'110',
+        a:'10',
+        b:'17',
+        c:'26',
+        d:'110',
         correct:'c'
     }, {
         question: 'What is the most used programming language in 2023?',
@@ -43,12 +43,11 @@ const quizData = [
 ]
 
 const questionEl = document.getElementById('question')
-
-//selecting label elements 
 const a_text = document.getElementById('a_text')
 const b_text = document.getElementById('b_text')
 const c_text = document.getElementById('c_text')
 const d_text = document.getElementById('d_text')
+const submitBtn = document.getElementById('submit')
 
 
 
@@ -56,10 +55,16 @@ const d_text = document.getElementById('d_text')
 
 // we want to keep track of the current Question being asked
 //currentQuestion is give an index value of 0
+// this will allow it to grab the first obj from the array.
 let currentQuiz = 0;
 loadQuiz()
 
+
+
+
+
 // create a function that load the quiz and the reloads every time that the submit button is clicked.
+//everytime that the quiz loads the next obj element within the array  will load 
 function loadQuiz() {
 //Starting of with the first object being the first quiz
 //the first question is located at quizData[0] = currentQuestion
@@ -67,17 +72,36 @@ function loadQuiz() {
 
     //assigning the contents fo the first question of the first obj to the innerText of the h2 element
     questionEl.innerText = currentQuizData.question;
-    
-    
     a_text.innerText = currentQuizData.a;
     b_text.innerText = currentQuizData.b;
     c_text.innerText = currentQuizData.c;
     d_text.innerText = currentQuizData.d;
-
-    
-    
-    
-    
-    
-    currentQuestion++;
 }
+
+
+function getSelected(){
+    console.log("hi there ")
+    const answers = document.querySelectorAll('.answer');
+    answers.forEach((answer) => {
+      console.log(answer.value);
+    })
+}
+
+
+
+submitBtn.addEventListener("click",() => {
+    currentQuiz++;
+
+    getSelected();
+
+    // //create a condition for loading the # of quizzes within the array
+    // if(currentQuiz <quizData.length) {
+    //     loadQuiz();
+    // } else {
+    //     alert("Congratulations, You finished!! ")
+    // }
+    
+});
+
+        
+
