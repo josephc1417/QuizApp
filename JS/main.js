@@ -26,7 +26,7 @@ const quizData = [
     },{
         question: "What does HTML stand for?",
         a:'Hypertext Markup Language',
-        b:'Happytimes making Love',
+        b:'Hay-times making Love',
         c:'Hypertext moveable Language',
         d:'Hexadecimal-text Multi-variable Language',
         correct:'a'
@@ -54,23 +54,27 @@ const submitBtn = document.getElementById('submit')
 
 
 // we want to keep track of the current Question being asked
-//currentQuestion is give an index value of 0
+//currentQuestion is given an index value of 0
 // this will allow it to grab the first obj from the array.
 let currentQuiz = 0;
+
+//!score variable will keep track of how my question were answered correctly
+let score = 0
+
+// !function call to load questions (conditional)
 loadQuiz()
 
 
 
-
-
-// create a function that load the quiz and the reloads every time that the submit button is clicked.
-//everytime that the quiz loads the next obj element within the array  will load 
+//!Creating a function to load Quiz from obj array
 function loadQuiz() {
+// deselectAnswers()
+
 //Starting of with the first object being the first quiz
 //the first question is located at quizData[0] = currentQuestion
     const currentQuizData = quizData[currentQuiz];
 
-    //assigning the contents fo the first question of the first obj to the innerText of the h2 element
+    //assigning the contents of the first question of the first obj to the innerText of the h2 element
     questionEl.innerText = currentQuizData.question;
     a_text.innerText = currentQuizData.a;
     b_text.innerText = currentQuizData.b;
@@ -78,30 +82,50 @@ function loadQuiz() {
     d_text.innerText = currentQuizData.d;
 }
 
-
+//!Creating a function for answers that are selected
 function getSelected(){
-    console.log("hi there ")
-    const answers = document.querySelectorAll('.answer');
-    answers.forEach((answer) => {
-      console.log(answer.value);
-    })
+   
+    let answer = undefined;
+    const answerEls = document.querySelectorAll(".answer");
+   
+    
+    answerEls.forEach((answerEl) => {
+      if(answerEl.checked){
+        answer = answerEl.id;
+      }
+
+      
+    });
+    return answer
 }
 
 
+//!Creating a function that deselects answers when next question is loaded
+function deselectAnswers(){
+    answerEls.forEach((answerEl) => {
+        answerEl.checked = false;
+    });
+}
 
+//!Event listener for when the submit button is clicked
 submitBtn.addEventListener("click",() => {
-    currentQuiz++;
-
-    getSelected();
-
-    // //create a condition for loading the # of quizzes within the array
-    // if(currentQuiz <quizData.length) {
-    //     loadQuiz();
-    // } else {
-    //     alert("Congratulations, You finished!! ")
-    // }
+    //check to see the answer
+    const answer = getSelected();
+       
+        if(answer) {
+            if(answer === quizData[currentQuiz].correct){
+                score++;
+            }
+            
+            currentQuiz++;
+            //create a condition for loading the # of quizzes within the array
+            if(currentQuiz < quizData.length) {
+                loadQuiz();
+            } else {
+              quiz.innerHTML = `<h2> You answered correctly at ${score}/${quizData.length} question.</h2>`;   
+            }
+        }
     
 });
 
         
-
