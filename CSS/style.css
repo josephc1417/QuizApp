@@ -30,15 +30,15 @@ body{
 .quiz-container{
     /* background-color: transparent; */
     opacity: 200%;
-    width: 400px;
+    width: 700px;
     height: 290px;
     border-radius:10px;
     border:none;  
     background-color:rgb(243, 219, 5);
     opacity: 90%;
-    transition-property: width;
+    /* transition-property: width;
     transition-duration: 0.7s;
-    transition-timing-function: linear;
+    transition-timing-function: linear; */
 }
 .quiz-container:hover {
   width:700px;
@@ -49,6 +49,11 @@ body{
 
 .quiz-header{
     padding:1rem;
+}
+
+.newbtn{
+    margin-top: 25%;
+    
 }
 
 ul{

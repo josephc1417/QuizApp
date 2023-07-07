@@ -41,13 +41,16 @@ const quizData = [
 
 
 ]
-
+const savedAnswers = []
+const quiz = document.getElementById("quiz");
+const answerEls = document.querySelectorAll(".answer");
 const questionEl = document.getElementById('question')
 const a_text = document.getElementById('a_text')
 const b_text = document.getElementById('b_text')
 const c_text = document.getElementById('c_text')
 const d_text = document.getElementById('d_text')
 const submitBtn = document.getElementById('submit')
+
 
 
 
@@ -68,12 +71,12 @@ loadQuiz()
 
 //!Creating a function to load Quiz from obj array
 function loadQuiz() {
-// deselectAnswers()
-
-//Starting of with the first object being the first quiz
-//the first question is located at quizData[0] = currentQuestion
+    deselectAnswers()
+    
+    //Starting of with the first object being the first quiz
+    //the first question is located at quizData[0] = currentQuestion
     const currentQuizData = quizData[currentQuiz];
-
+    
     //assigning the contents of the first question of the first obj to the innerText of the h2 element
     questionEl.innerText = currentQuizData.question;
     a_text.innerText = currentQuizData.a;
@@ -84,19 +87,16 @@ function loadQuiz() {
 
 //!Creating a function for answers that are selected
 function getSelected(){
-   
-    let answer = undefined;
     const answerEls = document.querySelectorAll(".answer");
-   
+    
+    let answer = undefined;
     
     answerEls.forEach((answerEl) => {
-      if(answerEl.checked){
-        answer = answerEl.id;
-      }
-
-      
-    });
-    return answer
+        if(answerEl.checked) {
+            answer = answerEl.id;
+    }
+});
+return answer
 }
 
 
@@ -109,22 +109,30 @@ function deselectAnswers(){
 
 //!Event listener for when the submit button is clicked
 submitBtn.addEventListener("click",() => {
-    //check to see the answer
+    
+    //** this will be the returned value from the getSelected() */
     const answer = getSelected();
-       
+    
+    console.log(answer)
+
+    if(answer) {
         if(answer) {
-            if(answer === quizData[currentQuiz].correct){
-                score++;
-            }
-            
+           if(answer === quizData[currentQuiz].correct) {
+           savedAnswers.push(answer)
+            score++;
+           }
             currentQuiz++;
             //create a condition for loading the # of quizzes within the array
             if(currentQuiz < quizData.length) {
                 loadQuiz();
             } else {
-              quiz.innerHTML = `<h2> You answered correctly at ${score}/${quizData.length} question.</h2>`;   
+                // alert("you fucking finished bitch")   
+                quiz.style.textAlign = "center";
+                quiz.innerHTML = `<h2> You answered correctly at ${score}/${quizData.length} question.</h2> <button class="newbtn" onclick="location.reload()">Reload</button>`;
             }
+
         }
+    }
     
 });
 
